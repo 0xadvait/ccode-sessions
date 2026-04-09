@@ -1,0 +1,42 @@
+{
+  "name": "claude-sessions-ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "A local web UI for searching, browsing, and resuming Claude Code conversations across all projects and worktrees.",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,green \"tsx watch server/index.ts\" \"vite\"",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:client": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "fuse.js": "^7.1.0",
+    "chokidar": "^4.0.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zustand": "^5.0.5",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "lucide-react": "^0.561.0",
+    "date-fns": "^4.1.0",
+    "clsx": "^2.1.1",
+    "motion": "^12.23.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5",
+    "@vitejs/plugin-react": "^4.5.2",
+    "typescript": "^5.8.3",
+    "tailwindcss": "^4.1.8",
+    "@tailwindcss/postcss": "^4.1.8",
+    "postcss": "^8.5.6",
+    "concurrently": "^9.1.2",
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.15.0",
+    "tsx": "^4.19.4"
+  }
+}
