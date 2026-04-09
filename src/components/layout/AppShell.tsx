@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Sidebar } from '../sidebar/Sidebar'
+import { SpotlightSearch } from '../sidebar/SpotlightSearch'
 import { ConversationView } from '../conversation/ConversationView'
 import { WelcomeView } from '../conversation/WelcomeView'
 import { useStore } from '../../store/store'
@@ -11,8 +12,6 @@ export function AppShell() {
   const sidebarOpen = useStore((s) => s.sidebarOpen)
   const toggleSidebar = useStore((s) => s.toggleSidebar)
 
-  // Cmd+K global handler is in SearchInput
-  // Cmd+B to toggle sidebar
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if ((e.metaKey || e.ctrlKey) && e.key === 'b') {
@@ -26,15 +25,18 @@ export function AppShell() {
 
   return (
     <div className="flex h-full w-full overflow-hidden bg-surface-base">
+      {/* Spotlight Cmd+K */}
+      <SpotlightSearch />
+
       {/* Sidebar */}
       <AnimatePresence mode="popLayout">
         {sidebarOpen && (
           <motion.div
             initial={{ width: 0, opacity: 0 }}
-            animate={{ width: 360, opacity: 1 }}
+            animate={{ width: 340, opacity: 1 }}
             exit={{ width: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-            className="flex-shrink-0 overflow-hidden"
+            className="flex-shrink-0 overflow-hidden border-r border-border-subtle"
           >
             <Sidebar />
           </motion.div>
@@ -43,7 +45,7 @@ export function AppShell() {
 
       {/* Main */}
       <div className="flex flex-1 flex-col min-w-0 relative">
-        {/* Collapse toggle (when sidebar is closed) */}
+        {/* Sidebar toggle (when closed) */}
         <AnimatePresence>
           {!sidebarOpen && (
             <motion.button
@@ -52,14 +54,13 @@ export function AppShell() {
               exit={{ opacity: 0, x: -8 }}
               transition={{ duration: 0.15 }}
               onClick={toggleSidebar}
-              className="absolute top-3 left-3 z-20 p-2 rounded-xl glass text-text-secondary hover:text-text-primary transition-colors"
+              className="absolute top-3 left-3 z-20 p-2 rounded-xl glass text-text-muted hover:text-text-primary transition-colors"
             >
-              <PanelLeft size={18} />
+              <PanelLeft size={16} />
             </motion.button>
           )}
         </AnimatePresence>
 
-        {/* Content */}
         <AnimatePresence mode="wait">
           {selectedId ? (
             <motion.div
@@ -77,7 +78,7 @@ export function AppShell() {
               key="welcome"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               className="flex-1"
             >
               <WelcomeView />
