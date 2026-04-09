@@ -1,5 +1,5 @@
 {
-  "name": "claude-sessions-ui",
+  "name": "ccode-sessions",
   "version": "1.0.0",
   "license": "MIT",
   "description": "A local web UI for searching, browsing, and resuming Claude Code conversations across all projects and worktrees.",

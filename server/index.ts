@@ -161,7 +161,7 @@ async function start() {
 
   const PORT = parseInt(process.env.PORT || '3141')
   app.listen(PORT, '127.0.0.1', () => {
-    console.log(`Claude Sessions running on http://localhost:${PORT}`)
+    console.log(`ccode-sessions running on http://localhost:${PORT}`)
   })
 }
 

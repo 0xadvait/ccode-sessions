@@ -1,24 +1,24 @@
 <p align="center">
-  <h1 align="center">Claude Sessions UI</h1>
+  <h1 align="center">ccode-sessions</h1>
   <p align="center">
-    A local web UI for searching, browsing, and resuming your Claude Code conversations across every project and worktree.
+    A local web UI for searching, browsing, and resuming your <code>claude-code</code> conversations across every project and worktree.
   </p>
 </p>
 
 <p align="center">
-  <a href="https://github.com/0xadvait/claude-sessions-ui/blob/main/LICENSE">
+  <a href="https://github.com/0xadvait/ccode-sessions/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT">
   </a>
   <a href="https://twitter.com/advait_jayant">
     <img src="https://img.shields.io/twitter/follow/advait_jayant?style=social" alt="Twitter Follow">
   </a>
-  <a href="https://github.com/0xadvait/claude-sessions-ui/stargazers">
-    <img src="https://img.shields.io/github/stars/0xadvait/claude-sessions-ui?style=social" alt="GitHub Stars">
+  <a href="https://github.com/0xadvait/ccode-sessions/stargazers">
+    <img src="https://img.shields.io/github/stars/0xadvait/ccode-sessions?style=social" alt="GitHub Stars">
   </a>
 </p>
 
 <p align="center">
-  <img src="assets/screenshot-welcome.png" alt="Claude Sessions UI — browse and search 115 conversations across 30 projects" width="800">
+  <img src="assets/screenshot-welcome.png" alt="ccode-sessions — browse and search 115 conversations across 30 projects" width="800">
 </p>
 
 <p align="center">
@@ -29,9 +29,9 @@
 
 ## The Problem
 
-If you use [Claude Code](https://docs.anthropic.com/en/docs/claude-code) heavily, you accumulate hundreds of conversations scattered across dozens of project directories in `~/.claude/projects/`. Finding that one session where you debugged a tricky issue three weeks ago? Good luck.
+If you use `claude-code` heavily, you accumulate hundreds of conversations scattered across dozens of project directories in `~/.claude/projects/`. Finding that one session where you debugged a tricky issue three weeks ago? Good luck.
 
-Claude Sessions UI gives you a **ChatGPT-style sidebar** for your entire Claude Code history — with fuzzy search that lets you **describe what you were talking about** instead of remembering exact keywords.
+**ccode-sessions** gives you a **ChatGPT-style sidebar** for your entire conversation history — with fuzzy search that lets you **describe what you were working on** instead of remembering exact keywords.
 
 ## How It Works
 
@@ -44,14 +44,14 @@ Claude Sessions UI gives you a **ChatGPT-style sidebar** for your entire Claude 
 1. The backend scans every `~/.claude/projects/` directory to discover conversation JSONL files
 2. It parses metadata (first prompt, timestamps, message count, git branch) from each
 3. Builds a fuzzy search index over all conversations using [Fuse.js](https://www.fusejs.io/)
-4. Watches the directory for changes — new Claude Code sessions appear in the sidebar within seconds
+4. Watches the directory for changes — new sessions appear in the sidebar within seconds
 5. The frontend renders conversations with full Markdown, syntax-highlighted code blocks, and collapsible thinking/tool-use blocks
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/0xadvait/claude-sessions-ui.git
-cd claude-sessions-ui
+git clone https://github.com/0xadvait/ccode-sessions.git
+cd ccode-sessions
 npm install
 npm run dev
 ```
@@ -63,8 +63,9 @@ Open **http://localhost:5173**. That's it.
 | Feature | Description |
 |---------|-------------|
 | **Global browser** | Every conversation across all projects, grouped by date or project |
-| **Fuzzy search** | Describe what you were working on — Fuse.js finds the right conversation |
-| **Real-time updates** | New Claude Code sessions appear instantly via file watching + SSE |
+| **Spotlight search** | `Cmd/Ctrl+K` opens a spotlight modal — describe what you were working on |
+| **Fuzzy search** | Fuse.js-powered — no exact keywords needed |
+| **Real-time updates** | New sessions appear instantly via file watching + SSE |
 | **Resume in one click** | Opens a terminal with `claude --resume <session-id>` |
 | **Conversation viewer** | Markdown rendering, syntax highlighting, collapsible thinking/tool blocks |
 | **Keyboard shortcuts** | `Cmd/Ctrl+K` search, `Cmd/Ctrl+B` toggle sidebar, `Esc` clear |
@@ -108,7 +109,7 @@ server/
 src/
   components/
     layout/          # AppShell with sidebar + main area
-    sidebar/         # Search input, session list, session cards
+    sidebar/         # Spotlight search, session list, session cards
     conversation/    # Message bubbles, code blocks, thinking/tool blocks, welcome view
   hooks/             # useSessionList (SSE), useConversation (pagination), useSearch (debounce)
   store/             # Zustand state management
@@ -129,7 +130,7 @@ src/
 ## Requirements
 
 - Node.js 18+
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed (reads data from `~/.claude/`)
+- A CLI tool that stores conversations in `~/.claude/` (e.g. [claude-code](https://docs.anthropic.com/en/docs/claude-code))
 
 ## License
 
